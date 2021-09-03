@@ -1,4 +1,7 @@
 @extends('admin.layouts.master')
+@section('head')
+    {{ $head ?? '' }}
+@endsection
 @section('content')
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -27,3 +30,4 @@
     <!-- /.content -->
 </div>
 @endsection
+

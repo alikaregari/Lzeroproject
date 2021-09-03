@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CommentController;
 use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\Admin\RuleController;
@@ -17,3 +18,4 @@ Route::post('/users/{user}/add_permissions',[UserPermissionsController::class,'s
 Route::resource('products', ProductController::class);
 Route::resource('comments', CommentController::class)->only(['index','update','destroy']);
 Route::get('comments/approved',[CommentController::class,'approved']);
+Route::resource('categories', CategoryController::class);
