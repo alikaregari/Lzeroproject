@@ -32,6 +32,7 @@
                             <th>نام محصولات</th>
                             <th>قیمت</th>
                             <th>موجودی</th>
+                            <th>بازدید</th>
                             <th>تاریخ ایجاد</th>
                             @canany('edit_product','delete_product')
                                 <th>اقدامات</th>
@@ -42,6 +43,7 @@
                                 <td><span style="background-color: #227093;color: #FFFFFF;padding: 4px;border-radius: 3px">{{$product->name}}</span></td>
                                 <td>{{$product->price}}</td>
                                 <td>{{$product->inventory}}</td>
+                                <td>{{$product->view_count}}</td>
                                 <td>{{jdate($product->created_at)->format('%d %B %Y')}}</td>
                                 @canany('edit_product','delete_product')
                                     <td style="display: flex">

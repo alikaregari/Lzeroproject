@@ -39,6 +39,14 @@
                                 @error('label')<div class="invalid-feedback">{{$message}}</div> @enderror
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-2 control-label">دسته بندی ها</label>
+                            <select name="categories[]" class="form-control" multiple>
+                                @foreach(\App\Models\Category::all() as $category)
+                                    <option value="{{$category->id}}">{{$category->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
                     </div>
                     <!-- /.card-body -->
                     <div class="card-footer">

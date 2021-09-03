@@ -40,7 +40,7 @@
                         </tr>
                         @foreach($categories as $category)
                             <tr>
-                                <td><span style="background-color: #78e08f;color: #FFFFFF;padding: 4px;border-radius: 3px">{{$category->name}}</span></td>
+                                <td><span style="background-color: #474787;color: #FFFFFF;padding: 4px;border-radius: 3px">{{$category->name}}</span></td>
                                 <td>{{$category->created_at}}</td>
                                 <td style="display: flex">
                                     <form action="{{route('admin.categories.edit',$category->id)}}">

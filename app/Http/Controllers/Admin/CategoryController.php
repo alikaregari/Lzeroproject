@@ -39,7 +39,8 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $data=$request->validate([
-            'name'=>'required'
+            'name'=>'required',
+            'parent_id'=>'exists:categories,id|required'
         ]);
         Category::create($data);
         return redirect(route('admin.categories.index'));
@@ -77,10 +78,12 @@ class CategoryController extends Controller
     public function update(Request $request, Category $category)
     {
         $data=$request->validate([
-            'name'=>'required|min:3'
+            'name'=>'required|min:3',
+            'parent_id'=>'exists:categories,id|required'
         ]);
         $category->update([
-            'name'=>$data['name']
+            'name'=>$data['name'],
+            'parent_id'=>$data['parent_id']
         ]);
         return redirect(route('admin.categories.index'));
     }

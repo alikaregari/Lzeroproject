@@ -47,12 +47,14 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $data=$request->validate([
-            'name'=>'required','max:255','string',
-            'description'=>'required','string',
-            'price'=>'required','integer',
-            'inventory'=>'required','integer',
+            'name'=>['required','max:255','string'],
+            'description'=>['required','string'],
+            'price'=>['required','integer'],
+            'inventory'=>['required','integer'],
+            'categories'=>'required'
         ]);
-        auth()->user()->products()->create($data);
+        $product=auth()->user()->products()->create($data);
+        $product->categories()->sync($data['categories']);
         return redirect(route('admin.products.index'));
     }
 

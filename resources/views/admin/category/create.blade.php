@@ -22,6 +22,16 @@
                                 @error('name')<div class="invalid-feedback">{{$message}}</div> @enderror
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-2 control-label">انتخاب دسته بندی مادر</label>
+                            <select  name="parent_id" class="form-control @error('parent_id') is-invalid @enderror">
+                                <option value="0">هیچکدام</option>
+                                @foreach(\App\Models\Category::all() as $categories)
+                                    <option value="{{$categories->id}}">{{$categories->name}}</option>
+                                @endforeach
+                            </select>
+                            @error('parent_id')<div class="invalid-feedback">{{$message}}</div> @enderror
+                        </div>
                     </div>
                     <!-- /.card-body -->
                     <div class="card-footer">
