@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -23,11 +24,16 @@ class Product extends Model
     {
         return $this->morphMany(Comment::class,'commentable');
     }
-    public function commentzero(Product $product){
+    public function commentzero(Product $product): Collection
+    {
         return $product->comments()->where('parent_id',0)->where('approved',1)->get();
     }
     public function categories(): BelongsToMany
     {
         return $this->belongsToMany(Category::class);
+    }
+    public function attributes(): BelongsToMany
+    {
+        return $this->belongsToMany(Attribute::class);
     }
 }
