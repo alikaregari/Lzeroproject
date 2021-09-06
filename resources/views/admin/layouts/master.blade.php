@@ -192,5 +192,6 @@
 <script src="/plugins/chartjs-old/Chart.min.js"></script>
 <!-- PAGE SCRIPTS -->
 <script src="/dist/js/pages/dashboard2.js"></script>
+@yield('script')
 </body>
 </html>
