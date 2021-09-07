@@ -2,7 +2,9 @@
 
 namespace app\Helpers\Cart;
 
-class CartServiceProvider
+use Illuminate\Support\ServiceProvider;
+
+class CartServiceProvider extends ServiceProvider
 {
 
 }
