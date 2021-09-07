@@ -19,3 +19,4 @@ Route::resource('products', ProductController::class);
 Route::resource('comments', CommentController::class)->only(['index','update','destroy']);
 Route::get('comments/approved',[CommentController::class,'approved']);
 Route::resource('categories', CategoryController::class);
+Route::post('attribute/values',[ProductController::class,'ProductValues']);

@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class AttributeValue extends Model
 {
+    protected $fillable=['value','attribute_id'];
     use HasFactory;
     public function attribute(): BelongsTo
     {

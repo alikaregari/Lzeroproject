@@ -18,12 +18,13 @@ class CreateAttributesTable extends Migration
             $table->string('name');
             $table->timestamps();
         });
-        Schema::create('values', function (Blueprint $table) {
+        Schema::create('attribute_values', function (Blueprint $table) {
             $table->id();
             $table->string('value');
             $table->unsignedBigInteger('attribute_id');
             $table->foreign('attribute_id')->references('id')->on('attributes')->onDelete('cascade');
             $table->timestamps();
+            $table->unique(['value','attribute_id']);
         });
         Schema::create('attribute_product', function (Blueprint $table) {
             $table->unsignedBigInteger('attribute_id');

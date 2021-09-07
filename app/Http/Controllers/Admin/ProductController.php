@@ -3,7 +3,12 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Attribute;
+use App\Models\AttributeValue;
+use App\Models\Permission;
 use App\Models\product;
+use App\Models\User;
+use http\Env\Response;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -51,13 +56,25 @@ class ProductController extends Controller
             'description'=>['required','string'],
             'price'=>['required','integer'],
             'inventory'=>['required','integer'],
-            'categories'=>'required'
+            'categories'=>['required'],
+            'attributes'=>'array'
         ]);
-        $product=auth()->user()->products()->create($data);
+        return $data['attributes'];
+        /*$product=auth()->user()->products()->create($data);
         $product->categories()->sync($data['categories']);
-        return redirect(route('admin.products.index'));
+        return redirect(route('admin.products.index'));*/
     }
-
+    public function ProductValues(Request $request): \Illuminate\Http\JsonResponse
+    {
+        $data=$request->validate([
+            'value'=>'required',
+            'attribute_id'=>'required',
+        ]);
+        AttributeValue::create($data);
+        return response()->json([
+            'success'=>'Ok'
+        ]);
+    }
     /**
      * Display the specified resource.
      *

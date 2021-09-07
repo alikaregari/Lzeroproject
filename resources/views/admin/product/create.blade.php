@@ -12,7 +12,7 @@
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
-                <form class="form-horizontal" action="{{route('admin.products.store')}}" method="post">
+                <form class="form-horizontal" action="{{route('admin.products.store')}}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="card-body">
                         <div class="form-group">
@@ -47,6 +47,11 @@
                                 @endforeach
                             </select>
                         </div>
+                       {{-- <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-2 control-label">تصویر شاخص</label>
+                            <input name="avatar" type="text" class="form-control @error('price') is-invalid @enderror" id="inputEmail3" placeholder="قیمت را وارد کنید" value="{{old('price') ?? ''}}">
+                            @error('price')<div class="invalid-feedback">{{$message}}</div> @enderror
+                        </div>--}}
                         <div class="form-group">
                             <label for="inputEmail3" class="col-sm-2 control-label">افزودن ویژگی</label>
                             <div class="col-sm-12">
@@ -67,89 +72,57 @@
             </div>
         </div>
     </div>
-{{--    @slot('script')
-        <script>
-            let createNewAttr = ({ attributes , id }) => {
-                return `
-                    <div class="row" id="attribute-${id}">
-                        <div class="col-5">
-                            <div class="form-group">
-                                 <label>عنوان ویژگی</label>
-                                 <select name="attributes[${id}][name]" onchange="changeAttributeValues(event, ${id});" class="attribute-select form-control">
-                                    <option value="">انتخاب کنید</option>
-                                    ${
-                    attributes.map(function(item) {
-                        return `<option value="${item}">${item}</option>`
-                    })
-                }
-                                 </select>
-                            </div>
-                        </div>
-                        <div class="col-5">
-                            <div class="form-group">
-                                 <label>مقدار ویژگی</label>
-                                 <select name="attributes[${id}][value]" class="attribute-select form-control">
-                                        <option value="">انتخاب کنید</option>
-                                 </select>
-                            </div>
-                        </div>
-                         <div class="col-2">
-                            <label >اقدامات</label>
-                            <div>
-                                <button type="button" class="btn btn-sm btn-warning" onclick="document.getElementById('attribute-${id}').remove()">حذف</button>
-                            </div>
-                        </div>
-                    </div>
-                `
-            }
-
-            $("#add_product_attribute").click(function() {
-                let attributesSection = $('#attribute_section');
-                let id = attributesSection.children().length;
-
-                attributesSection.append(
-                    createNewAttr({
-                        attributes : [],
-                        id
-                    })
-                );
-
-                $('.attribute-select').select2({ tags : true });
-            });
-        </script>
-    @endslot--}}
+{{--    <select id="attribute_value_${id}" name="attributes[${id}][value]" class="attribute-select form-control"> <option value="0">انتخاب</option> </select>--}}
     @slot('script')
         <script>
+            function search(id){
+               /* let valueBox = $(`input[name='attributes[${id}][value]']`);*/
+                let valueBox = $(`input[name='attributes[${id}][value]']`).val();
+                let nameBox = $(`select[name='attributes[${id}][name]']`).val();
+                let data={
+                    value : valueBox,
+                    attribute_id : nameBox,
+                }
+                $.ajaxSetup({
+                    headers : {
+                        'X-CSRF-TOKEN' : document.head.querySelector('meta[name="csrf-token"]').content,
+                        'Content-Type' : 'application/json'
+                    }
+                });
+                $.ajax({
+                    type : 'POST',
+                    url : '/admin/attribute/values',
+                    data : JSON.stringify(data),
+                    success : function(data) {
+                        alert('ویژگی با موفقیت اضافه گردید')
+                    }
+                });
+            }
             let add =({ attribute,values,id}) =>{
                 return `
                 <div class="row" id="attr_section-${id}">
                         <div class="col-5">
                             <div class="form-group">
                                  <label>عنوان ویژگی</label>
-                                 <select class="attribute-select form-control">
-                                    <option value="">انتخاب کنید</option>
-                                    ${
-                                        attribute.map(function (item) {
-                                            return `<option value="${item}">${item}</option>`
-                                        })
-                                    }
+                                 <select id="attribute_name_${id}" name="attributes[${id}][name]" onchange="attributevaluget(${id})" class="attribute-select form-control">
+                                    <option value="0">انتخاب کنید</option>
+                                    @foreach(\App\Models\Attribute::all() as $attr)
+                                                <option value="{{$attr->id}}">{{$attr->name}}</option>
+                                    @endforeach
                                  </select>
                             </div>
                         </div>
                         <div class="col-5">
                             <div class="form-group">
                                  <label>مقدار ویژگی</label>
-                                 <select name='attr_id' class="attribute-select form-control">
-                                         <option value="1">انتخاب 1</option>
-                                         <option value="2">انتخاب 2</option>
-                                         <option value="3">انتخاب 3</option>
-                                 </select>
+                                 <input id="attribute_value_${id}" name="attributes[${id}][value]" type="search" class="form-control"  placeholder="قیمت را وارد کنید">
                             </div>
                         </div>
                          <div class="col-2">
                             <label >اقدامات</label>
                             <div>
-                                <button type="button" class="btn btn-sm btn-warning" onclick="document.getElementById('attr_section').remove()">حذف</button>
+                                <button type="button" class="btn btn-sm btn-success" onclick="search(${id})">save</button>
+                                <button type="button" class="btn btn-sm btn-warning" onclick="document.getElementById('attr_section-${id}').remove()">حذف</button>
                             </div>
                         </div>
                     </div>
