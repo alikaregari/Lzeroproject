@@ -132,7 +132,9 @@
                                 </button>
                             </div>
                             <div class="d-flex align-items-center mt-5">
+                                <form action="{{route('add.cart')}}">
                                 <button class="btn btn-primary ml-4"><i class="ti-bag mr-2"></i>افزودن به سبد</button>
+                                </form>
                                 <div class="product-link">
                                     <a class="wishlist-btn" href="#"> <i class="ti-heart"></i>
                                     </a>
