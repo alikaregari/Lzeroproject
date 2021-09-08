@@ -175,7 +175,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Helpers\Cart\CartServiceProvider::class,
-
+        App\Helpers\Login\LoginServiceProvider::class,
     ],
 
     /*
@@ -229,7 +229,8 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-
+        'Cart' =>App\Helpers\Cart\Cart::class,
+        'Login'=>App\Helpers\Login\Login::class,
     ],
 
 ];

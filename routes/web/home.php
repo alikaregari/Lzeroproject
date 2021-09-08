@@ -1,5 +1,6 @@
 <?php
 
+use App\Helpers\Login\Login;
 use App\Http\Controllers\Auth\AuthTokenController;
 use App\Http\Controllers\Auth\GoogleAuthController;
 use App\Http\Controllers\HomeController;
@@ -22,8 +23,8 @@ use Illuminate\Support\Facades\Auth;
 
 Route::get('/', function () {
     if (auth()->check()):
-        $res=Auth::user()->name;
-        return view('index',['user'=>$res]);
+        $user=Auth::user()->name;
+        return view('index',[compact('user')]);
         else:
             return view('index');
     endif;
@@ -47,5 +48,6 @@ Route::get('products/',[ProductController::class,'index'])->name('product_index'
 Route::get('products/single/{product}',[ProductController::class,'show'])->name('product-single');
 Route::post('comment',[HomeController::class,'send_comment'])->name('send.comment');
 Route::get('/cart',function (){
-   dd(app('cart'));
+   Cart::get(2);
 });
+
