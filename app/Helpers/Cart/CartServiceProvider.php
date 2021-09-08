@@ -1,6 +1,6 @@
 <?php
 
-namespace app\Helpers\Cart;
+namespace App\Helpers\Cart;
 
 use Illuminate\Support\ServiceProvider;
 
