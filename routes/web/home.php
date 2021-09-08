@@ -47,7 +47,4 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('products/',[ProductController::class,'index'])->name('product_index');
 Route::get('products/single/{product}',[ProductController::class,'show'])->name('product-single');
 Route::post('comment',[HomeController::class,'send_comment'])->name('send.comment');
-Route::get('/cart',function (){
-   Cart::get(2);
-});
-
+Route::post('cart/add/{product}',[\App\Http\Controllers\CartController::class,'AddToCart'])->name('add.cart');
