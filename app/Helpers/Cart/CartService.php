@@ -20,6 +20,11 @@ class CartService
                     'subject_id'=>$obj->id,
                     'subject_type'=> get_class($obj),
                 ]);
+        else:
+            $value=array_merge($value,[
+                'id'=> Str::random(10),
+                'model'=>false
+            ]);
         endif;
         $this->cart->put($value['id'],$value);
         session()->put('cart',$this->cart);
