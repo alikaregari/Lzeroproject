@@ -132,7 +132,7 @@
                                 </button>
                             </div>
                             <div class="d-flex align-items-center mt-5">
-                                <form action="{{route('add.cart',['product'=>$product])}}" method="post">
+                                <form action="{{route('add.cart',['product'=>$product->id])}}" method="post">
                                     @csrf
                                 <button class="btn btn-primary ml-4"><i class="ti-bag mr-2"></i>افزودن به سبد</button>
                                 </form>
