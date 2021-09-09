@@ -42,5 +42,17 @@ class CartService
         endif;
         return $value;
     }
+    /*  -END-   get value and merge by uor value and return it ---------> */
+    public function has($key){
+        if ($key instanceof Model):
+            return !is_null(
+                $this->cart->where('subject_id',$key->id)->where('subject_type',get_class($key))->first()
+            );
+        endif;
+        return !is_null(
+          $this->cart->firstWhere('id',$key)
+        );
+
+    }
 }
-/*  -END-   get value and merge by uor value and return it ---------> */
+
