@@ -14,20 +14,33 @@ class CartService
     }
 
     public function put(array $value,$obj = null){
-        if (isset($obj) && $obj instanceof Model):
-            $value=array_merge($value,[
-                    'id'=>Str::random(10),
-                    'subject_id'=>$obj->id,
-                    'subject_type'=> get_class($obj),
-                ]);
-        else:
-            $value=array_merge($value,[
-                'id'=> Str::random(10),
-                'model'=>false
-            ]);
-        endif;
+        $value = $this->Put_Get_Value($obj, $value);
         $this->cart->put($value['id'],$value);
         session()->put('cart',$this->cart);
         return $this;
     }
+
+    /**
+     * @param $obj
+     * @param array $value
+     * @return array|bool[]|string[]
+     */
+    /*  -START- get value and merge by uor value and return it ---------> */
+    private function Put_Get_Value($obj, array $value): array
+    {
+        if (isset($obj) && $obj instanceof Model):
+            $value = array_merge($value, [
+                'id' => Str::random(10),
+                'subject_id' => $obj->id,
+                'subject_type' => get_class($obj),
+            ]);
+        else:
+            $value = array_merge($value, [
+                'id' => Str::random(10),
+                'model' => false
+            ]);
+        endif;
+        return $value;
+    }
 }
+/*  -END-   get value and merge by uor value and return it ---------> */
