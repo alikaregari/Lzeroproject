@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\Facade;
  * @method static bool has(string $id)
  * @method static Collection all()
  * @method static Cart put(array $value,Model $obj)
+ * @method static Cart get($key)
+ * @method static Collection findrel($obj)
  */
 class Cart extends Facade
 {
