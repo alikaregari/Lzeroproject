@@ -14,6 +14,7 @@ class ProductController extends Controller
         return view('products.list',compact('products'));
     }
     public function show(Product $product){
+       return Cart::all();
        $comments=$product->commentzero($product);
         return view('products.single',compact('product','comments'));
     }
