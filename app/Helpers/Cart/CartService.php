@@ -4,6 +4,7 @@ namespace app\Helpers\Cart;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
+use phpDocumentor\Reflection\Types\This;
 
 class CartService
 {
@@ -52,7 +53,9 @@ class CartService
         return !is_null(
           $this->cart->firstWhere('id',$key)
         );
-
+    }
+    public function all(){
+       return  $this->cart;
     }
 }
 
