@@ -16,7 +16,6 @@ class CartController extends Controller
                 'price'=>$product->price
             ],$product);
         endif;
-
         return session()->get('cart');
     }
 }
