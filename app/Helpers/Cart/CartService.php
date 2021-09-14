@@ -20,7 +20,6 @@ class CartService
         session()->put('cart',$this->cart);
         return $this;
     }
-
     /**
      * @param $obj
      * @param array $value
@@ -35,10 +34,9 @@ class CartService
                 'subject_id' => $obj->id,
                 'subject_type' => get_class($obj),
             ]);
-        else:
+        elseif (!isset($value['id'])):
             $value = array_merge($value, [
                 'id' => Str::random(10),
-                'model' => false
             ]);
         endif;
         return $value;
@@ -74,6 +72,13 @@ class CartService
             return $item;
         endif;
         return $item;
+    }
+    public function update($product,$option){
+        $item=collect($this->get($product));
+        $new=$item->merge([
+           'quantity'=>$item['quantity']+$option,
+        ]);
+       return $this->put($new->toArray());
     }
 }
 
