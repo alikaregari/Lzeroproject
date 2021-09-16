@@ -158,6 +158,7 @@
 @section('script')
     <script>
     function UpdateCart(){
+            data=1;
         $.ajaxSetup({
             headers : {
                 'X-CSRF-TOKEN' : document.head.querySelector('meta[name="csrf-token"]').content,
@@ -166,7 +167,7 @@
         });
         $.ajax({
             type : 'POST',
-            url : '/admin/attribute/values',
+            url : 'cart/quantity/change}',
             data : JSON.stringify(data),
             success : function(data) {
                 alert('ویژگی با موفقیت اضافه گردید')
