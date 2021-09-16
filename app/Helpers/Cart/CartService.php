@@ -78,7 +78,16 @@ class CartService
         $new=$item->merge([
            'quantity'=>$item['quantity']+$option,
         ]);
-       return $this->put($new->toArray());
+        $this->put($new->toArray());
+        return redirect('cart');
+    }
+    public function updateChecking($product,$option){
+        $cart=Cart::get($product);
+        if ($cart['quantity'] <= $product->inventory-1):
+            Cart::update($product,$option);
+        else:
+            alert()->warning('موجودی درخواستی شما قابل پذیرش نمیباشد');
+        endif;
     }
 }
 
