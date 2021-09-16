@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Facade;
  * @method static Cart put(array $value,Model $obj)
  * @method static Cart get($key)
  * @method static Collection findrel($obj)
+ * @method static Cart updateChecking($product,$option)
  */
 class Cart extends Facade
 {
