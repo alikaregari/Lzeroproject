@@ -3,6 +3,7 @@
 use App\Helpers\Login\Login;
 use App\Http\Controllers\Auth\AuthTokenController;
 use App\Http\Controllers\Auth\GoogleAuthController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\Profile\TwofactorController;
@@ -47,5 +48,6 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('products/',[ProductController::class,'index'])->name('product_index');
 Route::get('products/single/{product}',[ProductController::class,'show'])->name('product-single');
 Route::post('comment',[HomeController::class,'send_comment'])->name('send.comment');
-Route::post('cart/add/{product}',[\App\Http\Controllers\CartController::class,'AddToCart'])->name('add.cart');
-Route::get('cart',[\App\Http\Controllers\CartController::class,'index'])->name('cart.index');
+Route::post('cart/add/{product}',[CartController::class,'AddToCart'])->name('add.cart');
+Route::get('cart',[CartController::class,'index'])->name('cart.index');
+Route::patch('cart/quantity/change',[CartController::class,'quantityChange']);
