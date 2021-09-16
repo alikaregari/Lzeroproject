@@ -21,13 +21,17 @@ class CartController extends Controller
     public function AddToCart(Product $product)
     {
         if (Cart::has($product)):
-            Cart::update($product,1);
+             Cart::updateChecking($product,1);
             else:
-                Cart::put([
-                    'quantity'=>1,
-                    'price'=>$product->price
-                ],$product);
+             Cart::put(['quantity'=>1,'price'=>$product->price],$product);
         endif;
         return redirect('cart');
+    }
+    public function quantityChange(Request $request){
+        $data=$request->validate([
+            'quantity'=>'required',
+            'id'=>'required',
+            //'cart'=>'required'
+        ]);
     }
 }
