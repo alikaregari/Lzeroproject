@@ -33,5 +33,13 @@ class CartController extends Controller
             'id'=>'required',
             //'cart'=>'required'
         ]);
+        if (Cart::has($data['id'])):
+            Cart::update($data['id'],[
+                'quantity'=>$data['quantity']
+            ]);
+            return response(['status'=>'success']);
+            else:
+            return response(['status'=>'error',404]);
+            endif;
     }
 }
