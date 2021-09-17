@@ -75,11 +75,6 @@ class CartService
     }
     public function update($product,$option){
         $item=collect($this->get($product));
-        if (is_numeric($option)):
-            $new=$item->merge([
-                'quantity'=>$item['quantity']+$option,
-            ]);
-        endif;
         if (is_array($option)):
             $new=$item->merge($option);
         endif;
@@ -89,7 +84,9 @@ class CartService
     public function updateChecking($product,$option){
         $cart=Cart::get($product);
         if ($cart['quantity'] <= $product->inventory-1):
-            Cart::update($product,$option);
+            Cart::update($product,[
+                'quantity'=>$cart['quantity']+$option
+            ]);
         else:
             alert()->warning('موجودی درخواستی شما قابل پذیرش نمیباشد');
         endif;
