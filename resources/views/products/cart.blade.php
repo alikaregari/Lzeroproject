@@ -175,7 +175,7 @@
                 _method:'patch'
             }),
             success : function(res) {
-                console.log(res)
+                location.reload()
             }
         });
     }
@@ -198,7 +198,7 @@
                 _method:'patch'
             }),
             success : function(res) {
-                console.log(res)
+                location.reload()
             }
         });
     }
