@@ -75,9 +75,14 @@ class CartService
     }
     public function update($product,$option){
         $item=collect($this->get($product));
-        $new=$item->merge([
-           'quantity'=>$item['quantity']+$option,
-        ]);
+        if (is_numeric($option)):
+            $new=$item->merge([
+                'quantity'=>$item['quantity']+$option,
+            ]);
+        endif;
+        if (is_array($option)):
+            $new=$item->merge($option);
+        endif;
         $this->put($new->toArray());
         return redirect('cart');
     }
