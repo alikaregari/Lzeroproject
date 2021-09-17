@@ -63,10 +63,10 @@
                                         </td>
                                         <td>
                                             <div class="d-flex justify-content-center align-items-center">
-                                                <button class="btn-product btn-product-up"> <i class="ti-minus"></i>
+                                                <button onclick="UpdateCart_C('{{$item['id']}}')" class="btn-product btn-product-up"> <i class="ti-minus"></i>
                                                 </button>
-                                                <input class="form-product" type="number" name="form-product" value="{{$item['quantity']}}" min="1" max="3">
-                                                <button class="btn-product btn-product-down" onclick="additem({{$item['id']}})"> <i class="ti-plus"></i>
+                                                <input id="quantity" onchange="UpdateCart(event,'{{$item['id']}}')" class="form-product" type="number" name="form-product" value="{{$item['quantity']}}" min="1" max="3">
+                                                <button onclick="UpdateCart_C('{{$item['id']}}')" class="btn-product btn-product-down"> <i class="ti-plus"></i>
                                                 </button>
                                             </div>
                                         </td>
@@ -88,7 +88,7 @@
                     <div class="col-lg-6">
                         <div class="row mb-5">
                             <div class="col-md-6 mb-3 mb-md-0">
-                                <button onclick="UpdateCart()" class="btn btn-primary btn-sm btn-block">بروز رسانی سبد</button>
+                                <button class="btn btn-primary btn-sm btn-block">بروز رسانی سبد</button>
                             </div>
                             <div class="col-md-6">
                                 <button class="btn btn-outline-primary btn-sm btn-block">لغو</button>
@@ -157,8 +157,7 @@
 @endsection
 @section('script')
     <script>
-    function UpdateCart(){
-            data=1;
+    function UpdateCart(event,id,cart = null){
         $.ajaxSetup({
             headers : {
                 'X-CSRF-TOKEN' : document.head.querySelector('meta[name="csrf-token"]').content,
@@ -167,10 +166,39 @@
         });
         $.ajax({
             type : 'POST',
-            url : 'cart/quantity/change}',
-            data : JSON.stringify(data),
-            success : function(data) {
-                alert('ویژگی با موفقیت اضافه گردید')
+            url : '/cart/quantity/change',
+            data : JSON.stringify({
+                quantity:event.target.value,
+                id:id,
+                btn:false,
+                /*cart:cart,*/
+                _method:'patch'
+            }),
+            success : function(res) {
+                console.log(res)
+            }
+        });
+    }
+    function UpdateCart_C(id){
+        var quantity=$("#quantity").val();
+        $.ajaxSetup({
+            headers : {
+                'X-CSRF-TOKEN' : document.head.querySelector('meta[name="csrf-token"]').content,
+                'Content-Type' : 'application/json'
+            }
+        });
+        $.ajax({
+            type : 'POST',
+            url : '/cart/quantity/change',
+            data : JSON.stringify({
+                quantity:quantity,
+                btn:true,
+                id:id,
+                /*cart:cart,*/
+                _method:'patch'
+            }),
+            success : function(res) {
+                console.log(res)
             }
         });
     }
