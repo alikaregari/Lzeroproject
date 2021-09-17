@@ -31,8 +31,14 @@ class CartController extends Controller
         $data=$request->validate([
             'quantity'=>'required',
             'id'=>'required',
+            'btn'=>'required'
             //'cart'=>'required'
         ]);
+        if ($data['btn']==true):
+            $data['quantity']=$data['quantity']+1;
+        endif;
+        unset($data['btn']);
+        return $data;
         if (Cart::has($data['id'])):
             Cart::update($data['id'],[
                 'quantity'=>$data['quantity']
