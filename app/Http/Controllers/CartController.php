@@ -14,7 +14,8 @@ class CartController extends Controller
         $this->call=collect([]);
     }
     public function index(){
-    /*    $this->call->put(1,[
+       /* $this->call->put(1,[
+            'id'=>1,
             'quantity'=>2,
             'price'=>25000,
             'product'=>[
@@ -23,6 +24,7 @@ class CartController extends Controller
             ]
         ]);
         $this->call->put(2,[
+            'id'=>2,
             'quantity'=>3,
             'price'=>35000,
             'product'=>[
@@ -30,13 +32,12 @@ class CartController extends Controller
                 'id'=>13
             ]
         ]);
-        $item=collect($this->call->get(1));
-        $item=$item->merge([
-            'quantity'=>7
-        ]);
-        $this->call->put(1,$item);
-        return $this->call;*/
+        $item=$this->call->filter(function ($item){
+            return 1!=$item['id'];
+        });
+        return $item;*/
         $cart=Cart::all();
+        //return $cart;
         return view('products.cart',compact('cart'));
     }
     public function AddToCart(Product $product)
@@ -67,5 +68,12 @@ class CartController extends Controller
             else:
             return response(['status'=>'error',404]);
             endif;
+    }
+    public function delete(Request $request){
+        $data=$request->validate([
+            'id'=>'required',
+        ]);
+           Cart::delete($data['id']);
+        return response(['status'=>true]);
     }
 }
