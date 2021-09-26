@@ -53,13 +53,13 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" placeholder="نام" required="required" data-error="فیلد نام ضروری است.">
+                                            <input value="{{old('name') ?? ''}}" type="text" name="name" class="form-control @error('name') is-invalid @enderror" placeholder="نام" required="required" data-error="فیلد نام ضروری است.">
                                             @error('name')<div class="help-block with-errors">{{$message}}</div> @enderror
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" placeholder="ایمیل" required="required" data-error="فیلد ایمیل ضروری است.">
+                                            <input value="{{old('email') ?? ''}}" type="email" name="email" class="form-control @error('email') is-invalid @enderror" placeholder="ایمیل" required="required" data-error="فیلد ایمیل ضروری است.">
                                             @error('email')<div class="help-block with-errors">{{$message}}</div> @enderror
                                         </div>
                                     </div>
