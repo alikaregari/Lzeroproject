@@ -57,10 +57,14 @@ class ProductController extends Controller
             'price'=>['required','integer'],
             'inventory'=>['required','integer'],
             'categories'=>['required'],
-            'attributes'=>'array'
+            'image'=>['required','image','mimes:jpg,jpeg,png','max:1024']
+            //'attributes'=>'array'
         ]);
-        return $data['attributes'];
-        /*$product=auth()->user()->products()->create($data);
+        $file=$request->file('image');
+        $move=$file->move(public_path('img'),uniqid().'.'.$file->getClientOriginalExtension());
+        dd($move);
+        //return $data['attributes'];
+      /*  $product=auth()->user()->products()->create($data);
         $product->categories()->sync($data['categories']);
         return redirect(route('admin.products.index'));*/
     }
