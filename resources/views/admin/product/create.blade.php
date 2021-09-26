@@ -49,7 +49,12 @@
                         </div>
                         <div class="form-group">
                             <label for="inputEmail3" class="col-sm-2 control-label">تصویر شاخص</label>
-                            <input name="image" type="file" class="form-control @error('image') is-invalid @enderror" value="{{old('image') ?? ''}}">
+                            <div class="input-group">
+                                <input type="text" id="image_label" class="form-control" name="image" aria-label="Image" aria-describedby="button-image" disabled>
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary" type="button" id="button-image">انتخاب</button>
+                                </div>
+                            </div>
                             @error('image')<div class="invalid-feedback">{{$message}}</div> @enderror
                         </div>
                         <div class="form-group">
@@ -74,6 +79,19 @@
 {{--    <select id="attribute_value_${id}" name="attributes[${id}][value]" class="attribute-select form-control"> <option value="0">انتخاب</option> </select>--}}
     @slot('script')
         <script>
+            document.addEventListener("DOMContentLoaded", function() {
+
+                document.getElementById('button-image').addEventListener('click', (event) => {
+                    event.preventDefault();
+
+                    window.open('/file-manager/fm-button', 'fm', 'width=1400,height=800');
+                });
+            });
+
+            // set file link
+            function fmSetLink($url) {
+                document.getElementById('image_label').value = $url;
+            }
             function search(id){
                /* let valueBox = $(`input[name='attributes[${id}][value]']`);*/
                 let valueBox = $(`input[name='attributes[${id}][value]']`).val();
