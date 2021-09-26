@@ -37,7 +37,7 @@
                                 <div class="col-lg-4 col-md-6">
                                     <div class="product-item">
                                         <div class="product-img">
-                                            <img class="img-fluid" src="assets/images/product/01.jpg" alt="">
+                                            <img class="img-fluid rounded" src="{{$product->image}}" alt="">
                                         </div>
                                         <div class="product-desc"> <a href="product-single.html" class="product-name mt-4 mb-2 d-block link-title">{{$product->name}}</a>
                                             <span class="product-price"><del class="text-muted">{{$product->price}} تومان </del>{{$product->price}} تومان </span>
