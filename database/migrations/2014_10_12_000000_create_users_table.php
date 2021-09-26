@@ -15,7 +15,7 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id()->unique()->autoIncrement();
-            $table->string('name');
+            $table->long('name');
             $table->string('email')->unique();
             $table->boolean('is_superuser')->default(0);
             $table->boolean('is_staff')->default(0);
