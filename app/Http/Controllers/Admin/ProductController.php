@@ -10,6 +10,7 @@ use App\Models\product;
 use App\Models\User;
 use http\Env\Response;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class ProductController extends Controller
 {
@@ -60,9 +61,7 @@ class ProductController extends Controller
             'image'=>['required','image','mimes:jpg,jpeg,png','max:1024']
             //'attributes'=>'array'
         ]);
-        $file=$request->file('image');
-        $name=uniqid().'.'.$file->getClientOriginalExtension();
-        $file->move(public_path('img'),$name);
+        $name = $this->getName($request);
         $data['image']='/img'.'/'.$name;
         //return $data['attributes'];
         $product=auth()->user()->products()->create($data);
@@ -117,6 +116,16 @@ class ProductController extends Controller
             'price'=>'required','integer',
             'inventory'=>'required','integer',
         ]);
+        if ($request->file('image')):
+            $request->validate([
+                'image'=>'image','mimes:jpg,jpeg,png','max:1024'
+            ]);
+            if (File::exists(public_path($product->image))):
+                File::delete(public_path($product->image));
+            endif;
+            $name = $this->getName($request);
+            $data['image']='/img'.'/'.$name;
+        endif;
         $product->update($data);
         return redirect(route('admin.products.index'));
     }
@@ -131,5 +140,17 @@ class ProductController extends Controller
     {
         $product->delete();
         return back();
+    }
+
+    /**
+     * @param Request $request
+     * @return string
+     */
+    private function getName(Request $request): string
+    {
+        $file = $request->file('image');
+        $name = uniqid() . '.' . $file->getClientOriginalExtension();
+        $file->move(public_path('img'), $name);
+        return $name;
     }
 }

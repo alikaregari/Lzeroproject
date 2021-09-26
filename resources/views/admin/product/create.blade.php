@@ -58,7 +58,6 @@
                                 <span class="btn btn-sm btn-success" id="add_product_attribute">ویژگی جدید</span>
                             </div>
                             <div id="attribute_section">
-
                             </div>
                         </div>
                     </div>

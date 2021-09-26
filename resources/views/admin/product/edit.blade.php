@@ -12,7 +12,7 @@
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
-                <form class="form-horizontal" action="{{route('admin.products.update',$product->id)}}" method="post">
+                <form class="form-horizontal" action="{{route('admin.products.update',$product->id)}}" method="post" enctype="multipart/form-data">
                     @csrf
                     @method('PATCH')
                     <div class="card-body">
@@ -38,6 +38,16 @@
                             <div class="col-sm-12">
                                 <textarea name="description" type="text" class="form-control @error('description') is-invalid @enderror" id="inputEmail3" placeholder="توضیحات را وارد کنید">{{old('description') ?? $product->name}}</textarea>
                                 @error('label')<div class="invalid-feedback">{{$message}}</div> @enderror
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-2 control-label">تصویر شاخص</label>
+                            <div class="col-sm-12">
+                                <input type="text" class="form-control text-center ltr" id="inputEmail3" value="{{$product->image}}" disabled>
+                                <img class="image img-fluid mt-3" alt="avatar" src="{{$product->image}}">
+                                <hr>
+                                <input name="image" type="file" class="form-control @error('image') is-invalid @enderror" value="{{old('image') ?? ''}}">
+                                @error('image')<div class="invalid-feedback">{{$message}}</div> @enderror
                             </div>
                         </div>
                     </div>
