@@ -58,11 +58,9 @@ class ProductController extends Controller
             'price'=>['required','integer'],
             'inventory'=>['required','integer'],
             'categories'=>['required'],
-            'image'=>['required','image','mimes:jpg,jpeg,png','max:1024']
+            'image'=>['required']
             //'attributes'=>'array'
         ]);
-        $name = $this->getName($request);
-        $data['image']='/img'.'/'.$name;
         //return $data['attributes'];
         $product=auth()->user()->products()->create($data);
         $product->categories()->sync($data['categories']);
