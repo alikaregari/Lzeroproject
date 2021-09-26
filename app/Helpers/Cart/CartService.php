@@ -91,5 +91,18 @@ class CartService
             alert()->warning('موجودی درخواستی شما قابل پذیرش نمیباشد');
         endif;
     }
+    public function CartDelete($key){
+        if (Cart::has($key)):
+                $this->cart=$this->cart->filter(function ($item) use ($key){
+                    if ($key instanceof Model):
+                    return ($item['subject_id'] != $key['subject_id'] && $item['subject_type'] != $key['subject_type']);
+                    else:
+                        return ($item['id']!= $key);
+                    endif;
+                });
+            session()->put('cart',$this->cart);
+        endif;
+        return false;
+    }
 }
 
