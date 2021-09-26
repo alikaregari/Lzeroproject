@@ -61,12 +61,13 @@ class ProductController extends Controller
             //'attributes'=>'array'
         ]);
         $file=$request->file('image');
-        $move=$file->move(public_path('img'),uniqid().'.'.$file->getClientOriginalExtension());
-        dd($move);
+        $name=uniqid().'.'.$file->getClientOriginalExtension();
+        $file->move(public_path('img'),$name);
+        $data['image']='/img'.'/'.$name;
         //return $data['attributes'];
-      /*  $product=auth()->user()->products()->create($data);
+        $product=auth()->user()->products()->create($data);
         $product->categories()->sync($data['categories']);
-        return redirect(route('admin.products.index'));*/
+        return redirect(route('admin.products.index'));
     }
     public function ProductValues(Request $request): \Illuminate\Http\JsonResponse
     {
