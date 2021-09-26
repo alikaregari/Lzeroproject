@@ -51,3 +51,4 @@ Route::post('comment',[HomeController::class,'send_comment'])->name('send.commen
 Route::post('cart/add/{product}',[CartController::class,'AddToCart'])->name('add.cart');
 Route::get('cart',[CartController::class,'index'])->name('cart.index');
 Route::patch('cart/quantity/change',[CartController::class,'quantityChange']);
+Route::delete('cart/delete',[CartController::class,'delete']);
