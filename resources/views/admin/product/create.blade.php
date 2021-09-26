@@ -47,11 +47,11 @@
                                 @endforeach
                             </select>
                         </div>
-                       {{-- <div class="form-group">
+                        <div class="form-group">
                             <label for="inputEmail3" class="col-sm-2 control-label">تصویر شاخص</label>
-                            <input name="avatar" type="text" class="form-control @error('price') is-invalid @enderror" id="inputEmail3" placeholder="قیمت را وارد کنید" value="{{old('price') ?? ''}}">
-                            @error('price')<div class="invalid-feedback">{{$message}}</div> @enderror
-                        </div>--}}
+                            <input name="image" type="file" class="form-control @error('image') is-invalid @enderror" value="{{old('image') ?? ''}}">
+                            @error('image')<div class="invalid-feedback">{{$message}}</div> @enderror
+                        </div>
                         <div class="form-group">
                             <label for="inputEmail3" class="col-sm-2 control-label">افزودن ویژگی</label>
                             <div class="col-sm-12">
