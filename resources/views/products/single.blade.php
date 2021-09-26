@@ -36,17 +36,17 @@
                 <div class="row">
                     <div class="col-lg-6 col-md-6">
                         <ul id="imageGallery">
-                            <li data-thumb="/assets/images/product/01.jpg" data-src="/assets/images/product/01.jpg">
-                                <img class="img-fluid w-100" src="/assets/images/product/01.jpg" alt="" />
+                            <li data-thumb="{{$product->image}}" data-src="{{$product->image}}">
+                                <img class="img-fluid w-100" src="{{$product->image}}" alt="" />
                             </li>
-                            <li data-thumb="/assets/images/product/02.jpg" data-src="/assets/images/product/02.jpg">
-                                <img class="img-fluid w-100" src="/assets/images/product/02.jpg" alt="" />
+                            <li data-thumb="{{$product->image}}" data-src="{{$product->image}}">
+                                <img class="img-fluid w-100" src="{{$product->image}}" alt="" />
                             </li>
-                            <li data-thumb="/assets/images/product/03.jpg" data-src="/assets/images/product/03.jpg">
-                                <img class="img-fluid w-100" src="/assets/images/product/03.jpg" alt="" />
+                            <li data-thumb="{{$product->image}}" data-src="{{$product->image}}">
+                                <img class="img-fluid w-100" src="{{$product->image}}" alt="" />
                             </li>
-                            <li data-thumb="/assets/images/product/04.jpg" data-src="/assets/images/product/04.jpg">
-                                <img class="img-fluid w-100" src="/assets/images/product/04.jpg" alt="" />
+                            <li data-thumb="{{$product->image}}" data-src="{{$product->image}}">
+                                <img class="img-fluid w-100" src="{{$product->image}}" alt="" />
                             </li>
                         </ul>
                     </div>
