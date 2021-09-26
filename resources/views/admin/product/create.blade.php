@@ -50,7 +50,7 @@
                         <div class="form-group">
                             <label for="inputEmail3" class="col-sm-2 control-label">تصویر شاخص</label>
                             <div class="input-group">
-                                <input type="text" id="image_label" class="form-control" name="image" aria-label="Image" aria-describedby="button-image" disabled>
+                                <input type="text" id="image_label" class="form-control" name="image" aria-label="Image" aria-describedby="button-image">
                                 <div class="input-group-append">
                                     <button class="btn btn-outline-secondary" type="button" id="button-image">انتخاب</button>
                                 </div>
