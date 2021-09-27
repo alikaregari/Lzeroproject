@@ -35,7 +35,7 @@
                         <div class="form-group">
                             <label for="inputEmail3" class="col-sm-2 control-label">توضیحات</label>
                             <div class="col-sm-12">
-                                <textarea name="description" type="text" class="form-control @error('description') is-invalid @enderror" id="inputEmail3" placeholder="توضیحات را وارد کنید" value="{{old('description') ?? ''}}"></textarea>
+                                <textarea id="editor1" name="description" type="text" class="form-control @error('description') is-invalid @enderror" id="inputEmail3" placeholder="توضیحات را وارد کنید" value="{{old('description') ?? ''}}"></textarea>
                                 @error('label')<div class="invalid-feedback">{{$message}}</div> @enderror
                             </div>
                         </div>
@@ -79,6 +79,9 @@
 {{--    <select id="attribute_value_${id}" name="attributes[${id}][value]" class="attribute-select form-control"> <option value="0">انتخاب</option> </select>--}}
     @slot('script')
         <script>
+            // Replace the <textarea id="editor1"> with a CKEditor 4
+            // instance, using default configuration.
+            CKEDITOR.replace( 'editor1' );
             document.addEventListener("DOMContentLoaded", function() {
 
                 document.getElementById('button-image').addEventListener('click', (event) => {
