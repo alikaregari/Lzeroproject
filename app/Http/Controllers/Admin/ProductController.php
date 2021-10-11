@@ -58,12 +58,23 @@ class ProductController extends Controller
             'price'=>['required','integer'],
             'inventory'=>['required','integer'],
             'categories'=>['required'],
-            'image'=>['required']
-            //'attributes'=>'array'
+            'image'=>['required'],
+            'attributes'=>'array',
         ]);
-        //return $data['attributes'];
         $product=auth()->user()->products()->create($data);
         $product->categories()->sync($data['categories']);
+        $attributes=collect($data['attributes']);
+        $attributes->each(function ($item) use ($product){
+            if (is_null($item['name']) || is_null($item['value'])) return;
+            $attr=Attribute::firstOrCreate([
+                'name'=>$item['name']
+            ]);
+            $val=AttributeValue::firstOrCreate([
+                'value'=>$item['value'],
+                'attribute_id'=>$attr->id
+            ]);
+            $product->attributes()->attach($attr->id,['value_id'=>$val->id]);
+        });
         return redirect(route('admin.products.index'));
     }
     public function ProductValues(Request $request): \Illuminate\Http\JsonResponse
@@ -76,6 +87,10 @@ class ProductController extends Controller
         return response()->json([
             'success'=>'Ok'
         ]);
+    }
+    public function ProductLoadValues(Request $request){
+        $attr=Attribute::find($request['attribute_id']);
+        return json_encode($attr->values);
     }
     /**
      * Display the specified resource.

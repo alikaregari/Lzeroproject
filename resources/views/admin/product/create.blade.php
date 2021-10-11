@@ -76,12 +76,14 @@
             </div>
         </div>
     </div>
-{{--    <select id="attribute_value_${id}" name="attributes[${id}][value]" class="attribute-select form-control"> <option value="0">انتخاب</option> </select>--}}
+
+    {{--<input id="attribute_value_${id}" name="attributes[${id}][value]" type="search" class="form-control"  placeholder="قیمت را وارد کنید">--}}
+    {{--    <select id="attribute_value_${id}" name="attributes[${id}][value]" class="attribute-select form-control"> <option value="0">انتخاب</option> </select>--}}
     @slot('script')
         <script>
             // Replace the <textarea id="editor1"> with a CKEditor 4
             // instance, using default configuration.
-            CKEDITOR.replace( 'editor1' );
+            CKEDITOR.replace( 'editor1' ,{filebrowserImageBrowseUrl: '/file-manager/ckeditor'});
             document.addEventListener("DOMContentLoaded", function() {
 
                 document.getElementById('button-image').addEventListener('click', (event) => {
@@ -125,9 +127,9 @@
                             <div class="form-group">
                                  <label>عنوان ویژگی</label>
                                  <select id="attribute_name_${id}" name="attributes[${id}][name]" onchange="attributevaluget(${id})" class="attribute-select form-control">
-                                    <option value="0">انتخاب کنید</option>
+                                    <option value="">انتخاب کنید</option>
                                     @foreach(\App\Models\Attribute::all() as $attr)
-                                                <option value="{{$attr->id}}">{{$attr->name}}</option>
+                                                <option value="{{$attr->name}}">{{$attr->name}}</option>
                                     @endforeach
                                  </select>
                             </div>
@@ -135,20 +137,19 @@
                         <div class="col-5">
                             <div class="form-group">
                                  <label>مقدار ویژگی</label>
-                                 <input id="attribute_value_${id}" name="attributes[${id}][value]" type="search" class="form-control"  placeholder="قیمت را وارد کنید">
-                            </div>
-                        </div>
-                         <div class="col-2">
-                            <label >اقدامات</label>
-                            <div>
-                                <button type="button" class="btn btn-sm btn-success" onclick="search(${id})">save</button>
+                                   <input id="attribute_value_${id}" name="attributes[${id}][value]" type="search" class="form-control"  placeholder="مقدار را وارد کنید">
+                </div>
+           </div>
+            <div class="col-2">
+               <label >اقدامات</label>
+               <div>
+                   <button type="button" class="btn btn-sm btn-success" onclick="search(${id})">save</button>
                                 <button type="button" class="btn btn-sm btn-warning" onclick="document.getElementById('attr_section-${id}').remove()">حذف</button>
                             </div>
                         </div>
                     </div>
                 `
             }
-            var tags="<a>sdasdasd</a>"
                $("#add_product_attribute").click(function () {
                    let attr_section=$("#attribute_section");
                    var id=attr_section.children().length;
@@ -160,6 +161,41 @@
                        })
                    )
                })
+            function attributevaluget(id){
+                let atribute_section=$(`select[name='attributes[${id}][value]']`);
+                let nameBox = $(`select[name='attributes[${id}][name]']`).val();
+                let data={
+                    attribute_id : nameBox,
+                }
+                $.ajaxSetup({
+                    headers : {
+                        'X-CSRF-TOKEN' : document.head.querySelector('meta[name="csrf-token"]').content,
+                        'Content-Type' : 'application/json'
+                    }
+                });
+                $.ajax({
+                    type : 'POST',
+                    url : '/admin/attribute/load_values',
+                    data : JSON.stringify(data),
+                    success : function(data) {
+                        var value=data;
+                        console.log(value);
+                    }
+                });
+                /*atribute_section.append(
+                    add_value({
+                        id
+                    })
+                )*/
+            }
+            let add_value =({id}) =>{
+                return `
+                    <option value="">انتخاب کنید</option>
+                    @foreach(\App\Models\AttributeValue::all() as $attr)
+                         <option value="{{$attr->id}}">{{$attr->value}}</option>
+                    @endforeach
+                `
+            }
         </script>
     @endslot
 @endcomponent

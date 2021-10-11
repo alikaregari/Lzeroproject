@@ -19,7 +19,7 @@
     <!-- template rtl version -->
     <link rel="stylesheet" href="/dist/css/custom-style.css">
     <!-- Make sure the path to CKEditor is correct. -->
-    <script src="/js/ckeditor-4/ckeditor.js"></script>
+    <script src="/js/ckeditor/ckeditor.js"></script>
     <meta name="csrf-token" content="{{csrf_token()}}">
     @yield('head')
 </head>

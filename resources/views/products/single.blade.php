@@ -165,8 +165,7 @@
                             <div class="tab-content pt-5">
                                 <div role="tabpanel" class="tab-pane fade show active" id="tab3-1">
                                     <h5 class="mb-3">توضیحات محصول</h5>
-                                    <pre>    {{$product->description}}</pre>
-
+                                        {{$product->description}}
                                 </div>
                                 <div role="tabpanel" class="tab-pane fade" id="tab3-2">
                                     <h5 class="mb-3">اطلاعات اضافی</h5>
