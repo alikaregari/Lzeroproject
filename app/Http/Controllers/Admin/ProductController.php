@@ -63,18 +63,7 @@ class ProductController extends Controller
         ]);
         $product=auth()->user()->products()->create($data);
         $product->categories()->sync($data['categories']);
-        $attributes=collect($data['attributes']);
-        $attributes->each(function ($item) use ($product){
-            if (is_null($item['name']) || is_null($item['value'])) return;
-            $attr=Attribute::firstOrCreate([
-                'name'=>$item['name']
-            ]);
-            $val=AttributeValue::firstOrCreate([
-                'value'=>$item['value'],
-                'attribute_id'=>$attr->id
-            ]);
-            $product->attributes()->attach($attr->id,['value_id'=>$val->id]);
-        });
+        $this->syncAttributes($data['attributes'], $product);
         return redirect(route('admin.products.index'));
     }
     public function ProductValues(Request $request): \Illuminate\Http\JsonResponse
@@ -128,6 +117,7 @@ class ProductController extends Controller
             'description'=>'required','string',
             'price'=>'required','integer',
             'inventory'=>'required','integer',
+            'attributes'=>'array',
         ]);
         if ($request->file('image')):
             $request->validate([
@@ -140,6 +130,8 @@ class ProductController extends Controller
             $data['image']='/img'.'/'.$name;
         endif;
         $product->update($data);
+        $product->attributes()->detach();
+        $this->syncAttributes($data['attributes'], $product);
         return redirect(route('admin.products.index'));
     }
 
@@ -165,5 +157,25 @@ class ProductController extends Controller
         $name = uniqid() . '.' . $file->getClientOriginalExtension();
         $file->move(public_path('img'), $name);
         return $name;
+    }
+
+    /**
+     * @param $attributes1
+     * @param $product
+     */
+    private function syncAttributes($attributes1, $product): void
+    {
+        $attributes = collect($attributes1);
+        $attributes->each(function ($item) use ($product) {
+            if (is_null($item['name']) || is_null($item['value'])) return;
+            $attr = Attribute::firstOrCreate([
+                'name' => $item['name']
+            ]);
+            $val = AttributeValue::firstOrCreate([
+                'value' => $item['value'],
+                'attribute_id' => $attr->id
+            ]);
+            $product->attributes()->attach($attr->id, ['value_id' => $val->id]);
+        });
     }
 }

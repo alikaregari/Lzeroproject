@@ -35,14 +35,9 @@ class AuthServiceProvider extends ServiceProvider
                 return true;
             endif;
         });
-        foreach (Permission::all() as  $permission):
-            Gate::define($permission->name,function ($currentUser) use ($permission){
-                      /*  if ($currentUser->hasPermission($permission)):
-                            return $currentUser->id==$user->id;
-                        else:
-                            return false;
-                        endif;*/
-                return $currentUser->hasPermission($permission);
+        foreach (Permission::all() as $permission):
+            Gate::define($permission->name,function (User $user) use ($permission){
+                return $user->hasPermission($permission);
             });
         endforeach;
     }
