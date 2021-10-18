@@ -2,11 +2,13 @@
 
 namespace App\Models;
 
+use App\Http\Controllers\Admin\ProductGalleryController;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 class Product extends Model
@@ -35,5 +37,8 @@ class Product extends Model
     public function attributes(): BelongsToMany
     {
         return $this->belongsToMany(Attribute::class)->withPivot('value_id');
+    }
+    public function gallery(): HasMany{
+        return $this->hasMany(ProductGalleryController::class);
     }
 }

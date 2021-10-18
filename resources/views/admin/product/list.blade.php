@@ -45,7 +45,7 @@
                                 <td>{{$product->inventory}}</td>
                                 <td>{{$product->view_count}}</td>
                                 <td>{{jdate($product->created_at)->format('%d %B %Y')}}</td>
-                                @canany('edit_product','delete_product')
+                                @canany('edit_product','delete_product','gallery_product')
                                     <td style="display: flex">
                                         @can('edit_product')
                                             <form action="{{route('admin.products.edit',$product->id)}}">
@@ -59,7 +59,11 @@
                                                 <button type="submit" class="btn btn-sm btn-danger ml-2">حذف</button>
                                             </form>
                                         @endcan
-
+                                            @can('gallery_product')
+                                                <form action="{{route('admin.products.gallery.index',$product->id)}}">
+                                                    <button type="submit" class="btn btn-sm btn-warning ml-2">گالری تصاویر</button>
+                                                </form>
+                                            @endcan
                                     </td>
                                 @endcan
                             </tr>
