@@ -61,9 +61,7 @@ class CartController extends Controller
         endif;
         unset($data['btn']);
         if (Cart::has($data['id'])):
-            Cart::update($data['id'],[
-                'quantity'=>$data['quantity']
-            ]);
+            Cart::updateChecking($data['id'],$data['quantity']);
             return response(['status'=>'success']);
             else:
             return response(['status'=>'error',404]);

@@ -39,6 +39,6 @@ class Product extends Model
         return $this->belongsToMany(Attribute::class)->withPivot('value_id');
     }
     public function gallery(): HasMany{
-        return $this->hasMany(ProductGalleryController::class);
+        return $this->hasMany(ProductGallery::class);
     }
 }

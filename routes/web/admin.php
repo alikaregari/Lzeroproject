@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CommentController;
 use App\Http\Controllers\admin\ProductController;
@@ -23,3 +24,4 @@ Route::resource('categories', CategoryController::class);
 Route::post('attribute/values',[ProductController::class,'ProductValues']);
 Route::post('attribute/load_values',[ProductController::class,'ProductLoadValues']);
 Route::resource('products.gallery', ProductGalleryController::class);
+Route::resource('blog', BlogController::class);

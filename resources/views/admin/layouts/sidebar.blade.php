@@ -108,8 +108,8 @@
                     </li>
                     @endcan
                     @can('show_products')
-                        <li class="nav-item has-treeview {{is_Active(['admin.products.index','admin.products.create','admin.products.edit'],'menu-open')}}">
-                            <a href="#" class="nav-link {{is_Active(['admin.products.index','admin.products.create','admin.products.edit'],'active')}}">
+                        <li class="nav-item has-treeview {{is_Active(['admin.products.index','admin.products.create','admin.products.edit','admin.categories.index','admin.categories.create'],'menu-open')}}">
+                            <a href="#" class="nav-link {{is_Active(['admin.products.index','admin.products.create','admin.products.edit','admin.categories.index','admin.categories.create'],'active')}}">
                                 <i class="nav-icon fa fa-cube"></i>
                                 <p>
                                     محصولات
@@ -129,9 +129,14 @@
                                         <p>ایجاد محصول</p>
                                     </a>
                                 </li>
+                                <li class="nav-item">
+                                    <a href="{{route('admin.categories.index')}}" class="nav-link {{is_Active(['admin.categories.index','admin.categories.create'],'active')}}">
+                                        <i class="fa fa-list nav-icon"></i>
+                                        <p>دسته بندی ها</p>
+                                    </a>
+                                </li>
                             </ul>
                         </li>
-
                     @endcan
                  </ul>
             </nav>

@@ -92,7 +92,6 @@
                     window.open('/file-manager/fm-button', 'fm', 'width=1400,height=800');
                 });
             });
-
             // set file link
             function fmSetLink($url) {
                 document.getElementById('image_label').value = $url;
@@ -122,7 +121,7 @@
             }
             let add =({ attribute,values,id}) =>{
                 return `
-                <div class="row" id="attr_section-${id}">
+                <div style="animation: expand .5s ease-in-out;" class="row" id="attr_section-${id}">
                         <div class="col-5">
                             <div class="form-group">
                                  <label>عنوان ویژگی</label>
@@ -143,7 +142,6 @@
             <div class="col-2">
                <label >اقدامات</label>
                <div>
-                   <button type="button" class="btn btn-sm btn-success" onclick="search(${id})">save</button>
                                 <button type="button" class="btn btn-sm btn-warning" onclick="document.getElementById('attr_section-${id}').remove()">حذف</button>
                             </div>
                         </div>

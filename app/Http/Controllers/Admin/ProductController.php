@@ -146,7 +146,6 @@ class ProductController extends Controller
         $product->delete();
         return back();
     }
-
     /**
      * @param Request $request
      * @return string

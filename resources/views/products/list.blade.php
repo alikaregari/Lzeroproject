@@ -12,7 +12,7 @@
                         <ol class="breadcrumb justify-content-center bg-transparent p-0 m-0">
                             <li class="breadcrumb-item"><a class="text-dark" href="#">خانه</a>
                             </li>
-                            <li class="breadcrumb-item">فروشگاه</li>
+                            <li clas="breadcrumb-item">فروشگاه</li>
                             <li class="breadcrumb-item active text-primary" aria-current="page">محصولات</li>
                         </ol>
                     </nav>

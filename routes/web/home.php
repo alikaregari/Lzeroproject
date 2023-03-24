@@ -23,6 +23,7 @@ use Illuminate\Support\Facades\Auth;
 */
 
 Route::get('/', function () {
+
     if (auth()->check()):
         $user=Auth::user()->name;
         return view('index',[compact('user')]);

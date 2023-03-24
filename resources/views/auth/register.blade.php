@@ -49,7 +49,7 @@
                     <div class="col-lg-8 col-md-10 ml-auto mr-auto">
                         <div class="register-form text-center">
                             <form method="post" action="{{route('register')}}">
-                                @csrf
+                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">

@@ -83,9 +83,9 @@ class CartService
     }
     public function updateChecking($product,$option){
         $cart=Cart::get($product);
-        if ($cart['quantity'] <= $product->inventory-1):
+        if ($option <= $cart['product']->inventory):
             Cart::update($product,[
-                'quantity'=>$cart['quantity']+$option
+                'quantity'=>$option
             ]);
         else:
             alert()->warning('موجودی درخواستی شما قابل پذیرش نمیباشد');

@@ -51,7 +51,7 @@
                                                 <td>
                                                     <div class="media align-items-center">
                                                         <a href="#">
-                                                            <img class="img-fluid mr-lg-2 mb-2 mb-lg-0" src="assets/images/product-thumb/01.jpg" alt="">
+                                                            <img class="img-fluid mr-lg-2 mb-2 mb-lg-0 rounded" width="180px" height="180" src="{{$item['product']->image}}" alt="{{$item['product']->description}}">
                                                         </a>
                                                         <div class="media-body text-left">
                                                             <p class="mb-0">{{$item['product']->name}}</p>
@@ -158,7 +158,7 @@
 @endsection
 @section('script')
     <script>
-    function UpdateCart(event,id,cart = null){
+    function UpdateCart(event,id,inventory = null){
         $.ajaxSetup({
             headers : {
                 'X-CSRF-TOKEN' : document.head.querySelector('meta[name="csrf-token"]').content,
@@ -172,7 +172,6 @@
                 quantity:event.target.value,
                 id:id,
                 btn:false,
-                /*cart:cart,*/
                 _method:'patch'
             }),
             success : function(res) {
@@ -195,7 +194,6 @@
                 quantity:quantity,
                 btn:true,
                 id:id,
-                /*cart:cart,*/
                 _method:'patch'
             }),
             success : function(res) {
